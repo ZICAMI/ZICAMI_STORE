@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Model definitions — rename labels and swap image paths here
   const MODELS = {
-    'Model 1': { image: 'images/model-a.jpeg' },
-    'Model 2': { image: 'images/model-b.jpeg' },
-    'Model 3': { image: 'images/model-c.jpeg' }
+    'Model A': { image: 'images/model-a.jpeg' },
+    'Model B': { image: 'images/model-b.jpeg' },
+    'Model C': { image: 'images/model-c.jpeg' }
   };
 
   // Delivery prices per Wilaya
