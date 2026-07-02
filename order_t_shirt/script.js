@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =====================================================
 
   // Single source of truth for product price (in DA)
-  const PRODUCT_PRICE = 3500;
+  const PRODUCT_PRICE = 3505;
 
   // Model definitions — rename labels and swap image paths here
   const MODELS = {
