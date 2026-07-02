@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Model definitions — rename labels and swap image paths here
   const MODELS = {
     'Model A': { image: 'images/model-a.jpeg' },
-    'Model B': { image: 'images/model-b.JPEG' },
+    'Model B': { image: 'images/model-b.jpeg' },
     'Model C': { image: 'images/model-c.jpeg' }
   };
 
