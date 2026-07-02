@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =====================================================
 
   // Product price - change this single value to update price everywhere
-  const PRODUCT_PRICE = 2500; // in DA
+  const PRODUCT_PRICE = 1000; // in DA
 
   // Delivery prices per Wilaya (home delivery / stop desk)
   const deliveryPrices = {

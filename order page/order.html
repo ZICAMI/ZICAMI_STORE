@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Your T-Shirt</title>
+<title>BRACLET </title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,11 +17,11 @@
     </div>
 
     <div class="product-info">
-      <h1 class="product-title"> BMW T-Shirt</h1>
+      <h1 class="product-title"> BRACLET BMW </h1>
       <p class="product-description">
-        T-shirt premium 100 % coton, coupe décontractée. Doux, respirant .
+      
       </p>
-      <p class="product-price" id="productPriceDisplay">2500 DA</p>
+      <p class="product-price" id="productPriceDisplay">1000 DA</p>
 
       <!-- Color Swatches -->
       <div class="color-options">
@@ -59,10 +59,10 @@
       The hidden inputs below carry computed values (color, size, wilaya, 
       delivery type, delivery cost, total price) so they arrive in the email.
     -->
-    <form id="orderForm" action="https://formsubmit.co/abdellahaiech57@gmail.com" method="POST" novalidate>
-
+    <form action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="09b44a62-9044-4d25-932c-92fc7e4e31c8">
       <!-- FormSubmit configuration (hidden) -->
-      <input type="hidden" name="_subject" value="New T-Shirt Order!">
+      <input type="hidden" name="_subject" value="New braclet Order!">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
 
@@ -85,7 +85,7 @@
       <!-- Phone Number -->
       <div class="form-group">
         <label for="phone">Numéro de Téléphone <span class="required">*</span></label>
-        <input type="tel" id="phone" name="Phone Number" placeholder="e.x. 0555 12 34 56" autocomplete="tel">
+        <input type="tel" id="phone" name="Phone Number" placeholder="e.x. 0555 55 55 55" autocomplete="tel">
         <span class="error-message" id="phoneError">Veuillez saisir un numéro de téléphone valide.</span>
       </div>
 
@@ -126,21 +126,21 @@
 
       <!-- Size Selection -->
       <div class="form-group">
-        <label>Taille <span class="required">*</span></label>
+        
         <div class="size-options" id="sizeOptions">
           <input type="radio" id="sizeS" name="size" value="S" class="size-radio">
-          <label for="sizeS" class="size-label">S</label>
+          
 
           <input type="radio" id="sizeM" name="size" value="M" class="size-radio">
-          <label for="sizeM" class="size-label">M</label>
+          
 
           <input type="radio" id="sizeL" name="size" value="L" class="size-radio">
-          <label for="sizeL" class="size-label">L</label>
+          
 
           <input type="radio" id="sizeXL" name="size" value="XL" class="size-radio">
-          <label for="sizeXL" class="size-label">XL</label>
+          
         </div>
-        <span class="error-message" id="sizeError">Veuillez sélectionner une taille.</span>
+        
       </div>
 
       <!-- Color Selection -->
@@ -181,7 +181,7 @@
 
         <div class="summary-row">
           <span class="summary-label">Prix ​​du produit</span>
-          <span class="summary-value" id="summaryProductPrice">2500 DA</span>
+          <span class="summary-value" id="summaryProductPrice">1000 DA</span>
         </div>
 
         <div class="summary-row">
@@ -198,7 +198,7 @@
 
         <div class="summary-row summary-total">
           <span class="summary-label">Total </span>
-          <span class="summary-value" id="summaryTotalPrice">2500 DA</span>
+          <span class="summary-value" id="summaryTotalPrice">1000 DA</span>
         </div>
       </div>
 
