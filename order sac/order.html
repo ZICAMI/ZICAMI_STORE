@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> SACOCHE </title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ===== LEFT SIDE: PRODUCT PREVIEW ===== -->
+  <section class="product-preview">
+    <div class="product-image-wrapper">
+      <img id="productImage" src="images/SAC.jpg" alt="Classic T-Shirt" class="product-image">
+    </div>
+
+    <div class="product-info">
+      <h1 class="product-title"> SACOCHE BMW</h1>
+      <p class="product-description">
+        Sacoche BMW .
+      </p>
+      <p class="product-price" id="productPriceDisplay">12000 DA</p>
+
+      <!-- Color Swatches -->
+      <div class="color-options">
+        <span class="option-label"> <span id="selectedColorLabel"></span></span>
+        <div class="swatches">
+          
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RIGHT SIDE: ORDER FORM ===== -->
+  <section class="order-form-section">
+    <h2 class="form-title">Passez votre commande</h2>
+    <p class="form-subtitle">Veuillez compléter les informations ci-dessous pour finaliser votre commande.</p>
+
+    <!-- 
+      FormSubmit setup:
+      Replace "your@email.com" with your real email address.
+      The hidden inputs below carry computed values (color, size, wilaya, 
+      delivery type, delivery cost, total price) so they arrive in the email.
+    -->
+    <form action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="09b44a62-9044-4d25-932c-92fc7e4e31c8">
+      <!-- FormSubmit configuration (hidden) -->
+      <input type="hidden" name="_subject" value="New SACOCHE Order!">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+
+      <!-- Hidden fields synced via JS to carry computed/selected values -->
+      <input type="hidden" name="Color" id="hiddenColor" value="Black">
+      <input type="hidden" name="Size" id="hiddenSize" value="">
+      <input type="hidden" name="Wilaya" id="hiddenWilaya" value="">
+      <input type="hidden" name="Delivery Type" id="hiddenDeliveryType" value="Home Delivery">
+      <input type="hidden" name="Product Price" id="hiddenProductPrice" value="2500">
+      <input type="hidden" name="Delivery Cost" id="hiddenDeliveryCost" value="0">
+      <input type="hidden" name="Total Price" id="hiddenTotalPrice" value="2500">
+
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="fullName">Nom et Prénom <span class="required">*</span></label>
+        <input type="text" id="fullName" name="Full Name" placeholder="e.x. zicami_la3ziz" autocomplete="name">
+        <span class="error-message" id="fullNameError">Veuillez saisir votre nom complet.</span>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phone">Numéro de Téléphone <span class="required">*</span></label>
+        <input type="tel" id="phone" name="Phone Number" placeholder="e.x. 0555 55 55 55" autocomplete="tel">
+        <span class="error-message" id="phoneError">Veuillez saisir un numéro de téléphone valide.</span>
+      </div>
+
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address <span class="required">*</span></label>
+        <textarea id="address" name="Address" rows="3" placeholder="Rue, ville, quartier..." autocomplete="street-address"></textarea>
+        <span class="error-message" id="addressError">Veuillez saisir votre adresse de livraison.</span>
+      </div>
+
+      <!-- Wilaya Selection -->
+      <div class="form-group">
+        <label for="wilaya">Wilaya <span class="required">*</span></label>
+        <select id="wilaya" name="WilayaSelect">
+          <option value="" disabled selected>Sélectionnez votre wilaya</option>
+          <!-- Options populated dynamically via JavaScript -->
+        </select>
+        <span class="error-message" id="wilayaError">Veuillez sélectionner votre wilaya.</span>
+      </div>
+
+      <!-- Delivery Type -->
+      <div class="form-group">
+        <label>Type de livraison <span class="required">*</span></label>
+        <div class="delivery-options" id="deliveryOptions">
+          <input type="radio" id="deliveryHome" name="deliveryType" value="home" class="delivery-radio" checked>
+          <label for="deliveryHome" class="delivery-label">
+            <i class="delivery-icon">🚚</i>
+            <span>Livraison à domicile</span>
+          </label>
+
+          <input type="radio" id="deliveryDesk" name="deliveryType" value="desk" class="delivery-radio">
+          <label for="deliveryDesk" class="delivery-label">
+            <i class="delivery-icon">🏢</i>
+            <span>Stop Desk </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Size Selection -->
+      <div class="form-group">
+        
+        <div class="size-options" id="sizeOptions">
+          <input type="radio" id="sizeS" name="size" value="S" class="size-radio">
+          
+
+          <input type="radio" id="sizeM" name="size" value="M" class="size-radio">
+          
+
+          <input type="radio" id="sizeL" name="size" value="L" class="size-radio">
+          
+
+          <input type="radio" id="sizeXL" name="size" value="XL" class="size-radio">
+          
+        </div>
+        
+      </div>
+
+      <!-- Color Selection -->
+      <div class="form-group">
+        
+        <div class="form-color-options" id="formColorOptions">
+          <input type="radio" id="colorBlack" name="formColor" value="black" class="form-color-radio" checked>
+          
+
+          
+            
+          </label>
+        </div>
+      </div>
+
+      <!-- Quantity Selector -->
+      <div class="form-group">
+        <label for="quantity">Quantité</label>
+        <div class="quantity-selector">
+          <button type="button" class="qty-btn" id="decreaseQty" aria-label="Decrease quantity">&minus;</button>
+          <input type="number" id="quantity" name="Quantity" value="1" min="1" max="99" readonly>
+          <button type="button" class="qty-btn" id="increaseQty" aria-label="Increase quantity">&plus;</button>
+        </div>
+      </div>
+
+      <!-- Order Notes -->
+      <div class="form-group">
+        <label for="notes">Notes de commande<span class="optional"> (optional)</span></label>
+        <textarea id="notes" name="Order Notes" rows="3" placeholder="Des instructions particulières concernant votre commande..."></textarea>
+      </div>
+
+      <!-- ===== ORDER SUMMARY CARD ===== -->
+      <div class="order-summary" id="orderSummary">
+        <h3 class="summary-title">votre commande</h3>
+
+        <div class="summary-row">
+          <span class="summary-label">Prix ​​du produit</span>
+          <span class="summary-value" id="summaryProductPrice">12000 DA</span>
+        </div>
+
+        <div class="summary-row">
+          <span class="summary-label">Quantité</span>
+          <span class="summary-value" id="summaryQuantity">1</span>
+        </div>
+
+        <div class="summary-row">
+          <span class="summary-label">Frais de livraison</span>
+          <span class="summary-value" id="summaryDeliveryCost">--</span>
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <div class="summary-row summary-total">
+          <span class="summary-label">Total </span>
+          <span class="summary-value" id="summaryTotalPrice">12000 DA</span>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn" id="submitBtn">Commandez maintenant</button>
+
+      <!-- Success Message -->
+      <div class="success-message" id="successMessage">
+        ✅ Votre commande a bien été enregistrée !
+      </div>
+
+    </form>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+<footer class="footer">
+    <p>&copy; Abdellah Chemseddine. All rights reserved.</p>
+</footer>
+</body>
+</html>
