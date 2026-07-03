@@ -1,110 +1,152 @@
 // =====================================================
-// ORDER FORM — SCRIPT
-// Handles: model switching, color switching,
-//          quantity stepper, Wilaya dropdown,
-//          live order summary, validation, FormSubmit
+// T-SHIRT ORDER FORM — SCRIPT
+// 5 models × 3 views (Front / Side / Back)
+// Thumbnail strip + prev/next arrow navigation
+// Live order summary, Wilaya pricing, FormSubmit
 // =====================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
   // =====================================================
   // 0. CONFIGURATION
+  //    To rename a model: change the key name AND update
+  //    the matching radio value + label in index.html.
+  //    Image paths follow the pattern:
+  //      images/<model-key>-front.png
+  //      images/<model-key>-side.png
+  //      images/<model-key>-back.png
   // =====================================================
 
-  // Single source of truth for product price (in DA)
-  const PRODUCT_PRICE = 3500;
+  const PRODUCT_PRICE = 3500; // DA — single source of truth
 
-  // Model definitions — rename labels and swap image paths here
+  // 5 models, each with 3 ordered views
   const MODELS = {
-    'Model A': { image: 'images/model-a.jpeg' },
-    'Model B': { image: 'images/model-b.jpeg' },
-    'Model C': { image: 'images/model-c.jpeg' }
+    'Model A': {
+      views: [
+        { label: 'Front', src: 'images/model-a-front.png.jpeg' },
+        { label: 'Side',  src: 'images/model-a-side.png.jpeg'  },
+        { label: 'Back',  src: 'images/model-a-back.png.jpeg'  }
+      ]
+    },
+    'Model B': {
+      views: [
+        { label: 'Front', src: 'images/model-b-front.png.jpeg' },
+        { label: 'Side',  src: 'images/model-b-side.png.jpeg'  },
+        { label: 'Back',  src: 'images/model-b-back.png.jpeg'  }
+      ]
+    },
+    'Model C': {
+      views: [
+        { label: 'Front', src: 'images/model-c-front.png.jpeg' },
+        { label: 'Side',  src: 'images/model-c-side.png.jpeg'  },
+        { label: 'Back',  src: 'images/model-c-back.png.jpeg'  }
+      ]
+    },
+    'Model D': {
+      views: [
+        { label: 'Front', src: 'images/model-d-front.png.jpeg' },
+        { label: 'Side',  src: 'images/model-d-side.png.jpeg'  },
+        { label: 'Back',  src: 'images/model-d-back.png.jpeg'  }
+      ]
+    },
+    'Model E': {
+      views: [
+        { label: 'Front', src: 'images/model-e-front.png.jpeg' },
+        { label: 'Side',  src: 'images/model-e-side.png.jpeg'  },
+        { label: 'Back',  src: 'images/model-e-back.png.jpeg' }
+      ]
+    }
   };
 
   // Delivery prices per Wilaya
   const deliveryPrices = {
-    "Alger": { home: 500, desk: 300 },
-    "Boumerdes": { home: 600, desk: 400 },
-    "Blida": { home: 600, desk: 400 },
-    "Tipaza": { home: 600, desk: 400 },
-    "Tizi Ouzou": { home: 700, desk: 450 },
-    "Bouira": { home: 700, desk: 450 },
-    "Medea": { home: 700, desk: 450 },
-    "Bejaia": { home: 800, desk: 500 },
-    "Bordj Bou Arreridj": { home: 800, desk: 500 },
-    "Ain Defla": { home: 800, desk: 500 },
-    "Ain Temouchent": { home: 800, desk: 500 },
-    "Annaba": { home: 800, desk: 500 },
-    "Batna": { home: 800, desk: 500 },
-    "Chlef": { home: 800, desk: 500 },
-    "Constantine": { home: 800, desk: 500 },
-    "Mascara": { home: 800, desk: 500 },
-    "Mila": { home: 800, desk: 500 },
-    "Mostaganem": { home: 800, desk: 500 },
-    "M'Sila": { home: 800, desk: 500 },
-    "Oran": { home: 800, desk: 500 },
-    "Oum El Bouaghi": { home: 800, desk: 500 },
-    "Relizane": { home: 800, desk: 500 },
-    "Tissemsilt": { home: 800, desk: 500 },
-    "Tlemcen": { home: 800, desk: 500 },
-    "Setif": { home: 800, desk: 500 },
-    "Sidi Bel Abbes": { home: 800, desk: 500 },
-    "Skikda": { home: 800, desk: 500 },
-    "Jijel": { home: 800, desk: 500 },
-    "El Tarf": { home: 900, desk: 600 },
-    "Guelma": { home: 900, desk: 600 },
-    "Khenchela": { home: 900, desk: 600 },
-    "Saida": { home: 900, desk: 600 },
-    "Souk Ahras": { home: 900, desk: 600 },
-    "Tebessa": { home: 900, desk: 600 },
-    "Tiaret": { home: 1000, desk: 600 },
-    "Oued Djellal": { home: 1000, desk: 600 },
-    "Djelfa": { home: 1000, desk: 600 },
-    "Laghouat": { home: 1000, desk: 600 },
-    "Biskra": { home: 1000, desk: 600 },
-    "Ghardaia": { home: 1100, desk: 700 },
-    "El Oued": { home: 1100, desk: 700 },
-    "El M'Ghair": { home: 1100, desk: 700 },
-    "Ouargla": { home: 1100, desk: 700 },
-    "Touggourt": { home: 1100, desk: 700 },
-    "El Meniaa": { home: 1100, desk: 800 },
-    "El Bayadh": { home: 1200, desk: 800 },
-    "Naama": { home: 1200, desk: 800 },
-    "Bechar": { home: 1200, desk: 800 },
-    "Beni Abbes": { home: 1500, desk: 1000 },
-    "Adrar": { home: 1500, desk: 1000 },
-    "Timimoun": { home: 1500, desk: 1000 },
-    "Tindouf": { home: 1700, desk: 1000 },
-    "In Salah": { home: 1800, desk: 1200 },
-    "Illizi": { home: 1900, desk: 1500 },
-    "Tamanrasset": { home: 2000, desk: 1500 }
+    "Alger":              { home: 500,  desk: 300  },
+    "Boumerdes":          { home: 600,  desk: 400  },
+    "Blida":              { home: 600,  desk: 400  },
+    "Tipaza":             { home: 600,  desk: 400  },
+    "Tizi Ouzou":         { home: 700,  desk: 450  },
+    "Bouira":             { home: 700,  desk: 450  },
+    "Medea":              { home: 700,  desk: 450  },
+    "Bejaia":             { home: 800,  desk: 500  },
+    "Bordj Bou Arreridj": { home: 800,  desk: 500  },
+    "Ain Defla":          { home: 800,  desk: 500  },
+    "Ain Temouchent":     { home: 800,  desk: 500  },
+    "Annaba":             { home: 800,  desk: 500  },
+    "Batna":              { home: 800,  desk: 500  },
+    "Chlef":              { home: 800,  desk: 500  },
+    "Constantine":        { home: 800,  desk: 500  },
+    "Mascara":            { home: 800,  desk: 500  },
+    "Mila":               { home: 800,  desk: 500  },
+    "Mostaganem":         { home: 800,  desk: 500  },
+    "M'Sila":             { home: 800,  desk: 500  },
+    "Oran":               { home: 800,  desk: 500  },
+    "Oum El Bouaghi":     { home: 800,  desk: 500  },
+    "Relizane":           { home: 800,  desk: 500  },
+    "Tissemsilt":         { home: 800,  desk: 500  },
+    "Tlemcen":            { home: 800,  desk: 500  },
+    "Setif":              { home: 800,  desk: 500  },
+    "Sidi Bel Abbes":     { home: 800,  desk: 500  },
+    "Skikda":             { home: 800,  desk: 500  },
+    "Jijel":              { home: 800,  desk: 500  },
+    "El Tarf":            { home: 900,  desk: 600  },
+    "Guelma":             { home: 900,  desk: 600  },
+    "Khenchela":          { home: 900,  desk: 600  },
+    "Saida":              { home: 900,  desk: 600  },
+    "Souk Ahras":         { home: 900,  desk: 600  },
+    "Tebessa":            { home: 900,  desk: 600  },
+    "Tiaret":             { home: 1000, desk: 600  },
+    "Oued Djellal":       { home: 1000, desk: 600  },
+    "Djelfa":             { home: 1000, desk: 600  },
+    "Laghouat":           { home: 1000, desk: 600  },
+    "Biskra":             { home: 1000, desk: 600  },
+    "Ghardaia":           { home: 1100, desk: 700  },
+    "El Oued":            { home: 1100, desk: 700  },
+    "El M'Ghair":         { home: 1100, desk: 700  },
+    "Ouargla":            { home: 1100, desk: 700  },
+    "Touggourt":          { home: 1100, desk: 700  },
+    "El Meniaa":          { home: 1100, desk: 800  },
+    "El Bayadh":          { home: 1200, desk: 800  },
+    "Naama":              { home: 1200, desk: 800  },
+    "Bechar":             { home: 1200, desk: 800  },
+    "Beni Abbes":         { home: 1500, desk: 1000 },
+    "Adrar":              { home: 1500, desk: 1000 },
+    "Timimoun":           { home: 1500, desk: 1000 },
+    "Tindouf":            { home: 1700, desk: 1000 },
+    "In Salah":           { home: 1800, desk: 1200 },
+    "Illizi":             { home: 1900, desk: 1500 },
+    "Tamanrasset":        { home: 2000, desk: 1500 }
   };
 
   // =====================================================
   // 1. ELEMENT REFERENCES
   // =====================================================
   const productImage       = document.getElementById('productImage');
+  const viewBadge          = document.getElementById('viewBadge');
+  const arrowPrev          = document.getElementById('arrowPrev');
+  const arrowNext          = document.getElementById('arrowNext');
+  const thumbnailStrip     = document.getElementById('thumbnailStrip');
+  const thumbBtns          = thumbnailStrip.querySelectorAll('.thumb-btn');
+  const thumbImgs          = thumbnailStrip.querySelectorAll('.thumb-img');
+
   const selectedModelLabel = document.getElementById('selectedModelLabel');
   const selectedColorLabel = document.getElementById('selectedColorLabel');
-
   const previewModelSwatches = document.querySelectorAll('.model-swatch');
-  const colorSwatches        = document.querySelectorAll('.swatch');
-  const formModelRadios      = document.querySelectorAll('input[name="formModel"]');
-  const formColorRadios      = document.querySelectorAll('input[name="formColor"]');
-  const deliveryRadios       = document.querySelectorAll('input[name="deliveryType"]');
+  const colorSwatches      = document.querySelectorAll('.swatch');
+  const formModelRadios    = document.querySelectorAll('input[name="formModel"]');
+  const formColorRadios    = document.querySelectorAll('input[name="formColor"]');
+  const deliveryRadios     = document.querySelectorAll('input[name="deliveryType"]');
+  const wilayaSelect       = document.getElementById('wilaya');
+  const quantityInput      = document.getElementById('quantity');
+  const decreaseBtn        = document.getElementById('decreaseQty');
+  const increaseBtn        = document.getElementById('increaseQty');
+  const orderForm          = document.getElementById('orderForm');
+  const successMessage     = document.getElementById('successMessage');
 
-  const wilayaSelect  = document.getElementById('wilaya');
-  const quantityInput = document.getElementById('quantity');
-  const decreaseBtn   = document.getElementById('decreaseQty');
-  const increaseBtn   = document.getElementById('increaseQty');
-  const orderForm     = document.getElementById('orderForm');
-  const successMessage = document.getElementById('successMessage');
-
-  // Summary display elements
-  const summaryProductPrice  = document.getElementById('summaryProductPrice');
-  const summaryQuantity      = document.getElementById('summaryQuantity');
-  const summaryDeliveryCost  = document.getElementById('summaryDeliveryCost');
-  const summaryTotalPrice    = document.getElementById('summaryTotalPrice');
+  // Summary elements
+  const summaryProductPrice = document.getElementById('summaryProductPrice');
+  const summaryQuantity     = document.getElementById('summaryQuantity');
+  const summaryDeliveryCost = document.getElementById('summaryDeliveryCost');
+  const summaryTotalPrice   = document.getElementById('summaryTotalPrice');
 
   // Hidden FormSubmit fields
   const hiddenModel        = document.getElementById('hiddenModel');
@@ -116,11 +158,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const hiddenDeliveryCost = document.getElementById('hiddenDeliveryCost');
   const hiddenTotalPrice   = document.getElementById('hiddenTotalPrice');
 
+  // =====================================================
+  // 2. STATE
+  // =====================================================
+  let activeModel   = 'Model A'; // currently selected model name
+  let activeViewIdx = 0;         // 0 = Front, 1 = Side, 2 = Back
   const MIN_QTY = 1;
   const MAX_QTY = 99;
 
   // =====================================================
-  // 2. POPULATE WILAYA DROPDOWN
+  // 3. POPULATE WILAYA DROPDOWN
   // =====================================================
   Object.keys(deliveryPrices).forEach(name => {
     const opt = document.createElement('option');
@@ -130,26 +177,67 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =====================================================
-  // 3. MODEL SWITCHING
-  // Clicking a preview swatch or a form card both do the
-  // same thing: swap the hero image and sync everything.
+  // 4. VIEW SWITCHER
+  //    Updates the hero image, badge, thumbnails and
+  //    arrow disabled states for a given view index.
+  // =====================================================
+  function switchView(idx, animate = true) {
+    const views = MODELS[activeModel].views;
+    // Clamp index within bounds
+    idx = Math.max(0, Math.min(idx, views.length - 1));
+    activeViewIdx = idx;
+
+    const view = views[idx];
+
+    // Animate hero image
+    if (animate) {
+      productImage.classList.add('switching');
+      setTimeout(() => {
+        productImage.src = view.src;
+        productImage.alt = activeModel + ' — ' + view.label;
+        productImage.classList.remove('switching');
+      }, 220);
+    } else {
+      productImage.src = view.src;
+      productImage.alt = activeModel + ' — ' + view.label;
+    }
+
+    // Update view badge
+    viewBadge.textContent = view.label;
+
+    // Update thumbnail active state
+    thumbBtns.forEach((btn, i) => {
+      btn.classList.toggle('active', i === idx);
+    });
+
+    // Update arrow disabled state
+    arrowPrev.disabled = (idx === 0);
+    arrowNext.disabled = (idx === views.length - 1);
+  }
+
+  // =====================================================
+  // 5. MODEL SWITCHER
+  //    Switches active model, refreshes thumbnails,
+  //    resets to the Front view, syncs all controls.
   // =====================================================
   function switchModel(modelName) {
-    const model = MODELS[modelName];
-    if (!model) return;
+    if (!MODELS[modelName]) return;
+    activeModel = modelName;
 
-    // Animate the hero image out, swap src, animate back in
-    productImage.classList.add('switching');
-    setTimeout(() => {
-      productImage.src = model.image;
-      productImage.alt = modelName;
-      productImage.classList.remove('switching');
-    }, 250);
+    // Refresh thumbnail images to match the new model
+    const views = MODELS[modelName].views;
+    thumbBtns.forEach((btn, i) => {
+      thumbImgs[i].src = views[i].src;
+      thumbImgs[i].alt = views[i].label;
+    });
 
-    // Update the preview label
+    // Reset to Front view (index 0)
+    switchView(0, true);
+
+    // Update preview label
     selectedModelLabel.textContent = modelName;
 
-    // Sync preview swatches
+    // Sync preview model swatches
     previewModelSwatches.forEach(btn => {
       btn.classList.toggle('active', btn.dataset.model === modelName);
     });
@@ -159,103 +247,95 @@ document.addEventListener('DOMContentLoaded', () => {
       radio.checked = (radio.value === modelName);
     });
 
-    // Update hidden field and summary
     hiddenModel.value = modelName;
     updateOrderSummary();
   }
 
-  // Preview swatch clicks → switch model
+  // =====================================================
+  // 6. EVENT LISTENERS — image navigation
+  // =====================================================
+
+  // Arrow buttons
+  arrowPrev.addEventListener('click', () => switchView(activeViewIdx - 1));
+  arrowNext.addEventListener('click', () => switchView(activeViewIdx + 1));
+
+  // Thumbnail clicks
+  thumbBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => switchView(i));
+  });
+
+  // Preview model swatch clicks
   previewModelSwatches.forEach(btn => {
     btn.addEventListener('click', () => switchModel(btn.dataset.model));
   });
 
-  // Form card radio clicks → switch model
+  // Form model radio card changes
   formModelRadios.forEach(radio => {
     radio.addEventListener('change', () => switchModel(radio.value));
   });
 
   // =====================================================
-  // 4. COLOR SWITCHING (independent from model)
+  // 7. COLOR SWITCHING (independent from model/view)
   // =====================================================
   function switchColor(colorName) {
-    // Update preview label
     selectedColorLabel.textContent = colorName;
-
-    // Update preview swatches active state
-    colorSwatches.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.color === colorName);
-    });
-
-    // Sync form color radios
-    formColorRadios.forEach(radio => {
-      radio.checked = (radio.value === colorName);
-    });
-
-    // Update hidden field
+    colorSwatches.forEach(btn => btn.classList.toggle('active', btn.dataset.color === colorName));
+    formColorRadios.forEach(r  => { r.checked = (r.value === colorName); });
     hiddenColor.value = colorName;
     updateOrderSummary();
   }
 
-  // Preview color swatch clicks
-  colorSwatches.forEach(btn => {
-    btn.addEventListener('click', () => switchColor(btn.dataset.color));
-  });
-
-  // Form color radio changes
-  formColorRadios.forEach(radio => {
-    radio.addEventListener('change', () => switchColor(radio.value));
-  });
+  colorSwatches.forEach(btn => btn.addEventListener('click', () => switchColor(btn.dataset.color)));
+  formColorRadios.forEach(r  => r.addEventListener('change', () => switchColor(r.value)));
 
   // =====================================================
-  // 5. QUANTITY STEPPER
+  // 8. QUANTITY STEPPER
   // =====================================================
   decreaseBtn.addEventListener('click', () => {
-    const val = parseInt(quantityInput.value, 10) || MIN_QTY;
-    if (val > MIN_QTY) { quantityInput.value = val - 1; updateOrderSummary(); }
+    const v = parseInt(quantityInput.value, 10) || MIN_QTY;
+    if (v > MIN_QTY) { quantityInput.value = v - 1; updateOrderSummary(); }
   });
 
   increaseBtn.addEventListener('click', () => {
-    const val = parseInt(quantityInput.value, 10) || MIN_QTY;
-    if (val < MAX_QTY) { quantityInput.value = val + 1; updateOrderSummary(); }
+    const v = parseInt(quantityInput.value, 10) || MIN_QTY;
+    if (v < MAX_QTY) { quantityInput.value = v + 1; updateOrderSummary(); }
   });
 
   // =====================================================
-  // 6. LIVE ORDER SUMMARY CALCULATION
+  // 9. LIVE ORDER SUMMARY
   // =====================================================
   function updateOrderSummary() {
-    const quantity     = parseInt(quantityInput.value, 10) || MIN_QTY;
+    const qty          = parseInt(quantityInput.value, 10) || MIN_QTY;
     const wilaya       = wilayaSelect.value;
     const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
-    const productTotal = PRODUCT_PRICE * quantity;
+    const productTotal = PRODUCT_PRICE * qty;
 
-    let deliveryCost      = 0;
-    let deliveryCostLabel = '--';
+    let cost      = 0;
+    let costLabel = '--';
 
     if (wilaya && deliveryPrices[wilaya]) {
-      deliveryCost      = deliveryPrices[wilaya][deliveryType];
-      deliveryCostLabel = `${deliveryCost} DA`;
+      cost      = deliveryPrices[wilaya][deliveryType];
+      costLabel = cost + ' DA';
     }
 
-    const total = productTotal + deliveryCost;
+    const total = productTotal + cost;
 
-    // Update visible summary with pulse animation
-    setWithPulse(summaryProductPrice, `${productTotal} DA`);
-    setWithPulse(summaryQuantity,     quantity);
-    setWithPulse(summaryDeliveryCost, deliveryCostLabel);
-    setWithPulse(summaryTotalPrice,   `${total} DA`);
+    setWithPulse(summaryProductPrice, productTotal + ' DA');
+    setWithPulse(summaryQuantity,     qty);
+    setWithPulse(summaryDeliveryCost, costLabel);
+    setWithPulse(summaryTotalPrice,   total + ' DA');
 
-    // Sync all hidden FormSubmit fields
-    hiddenModel.value        = document.querySelector('input[name="formModel"]:checked')?.value || '';
+    // Keep hidden FormSubmit fields in sync
+    hiddenModel.value        = activeModel;
     hiddenColor.value        = document.querySelector('input[name="formColor"]:checked')?.value || '';
     hiddenSize.value         = document.querySelector('input[name="size"]:checked')?.value || '';
     hiddenWilaya.value       = wilaya;
     hiddenDeliveryType.value = deliveryType === 'home' ? 'Home Delivery' : 'Stop Desk (Pickup)';
     hiddenProductPrice.value = productTotal;
-    hiddenDeliveryCost.value = deliveryCost;
+    hiddenDeliveryCost.value = cost;
     hiddenTotalPrice.value   = total;
   }
 
-  // Triggers summary refresh on Wilaya / delivery type change
   wilayaSelect.addEventListener('change', () => {
     wilayaSelect.closest('.form-group').classList.remove('invalid');
     updateOrderSummary();
@@ -270,50 +350,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Helper: update a summary element text and trigger pulse animation
+  // Pulse animation helper
   function setWithPulse(el, value) {
     el.textContent = value;
     el.classList.remove('updated');
-    void el.offsetWidth; // force reflow so animation re-fires
+    void el.offsetWidth; // force reflow
     el.classList.add('updated');
   }
 
   // =====================================================
-  // 7. FORM VALIDATION & SUBMISSION
+  // 10. FORM VALIDATION & SUBMISSION
   // =====================================================
-  orderForm.addEventListener('submit', (e) => {
+  orderForm.addEventListener('submit', e => {
     let valid = true;
 
-    valid = validateTextField('fullName',  v => v.trim().length > 0)            && valid;
-    valid = validateTextField('phone',     v => /^[+]?[\d\s\-().]{7,}$/.test(v.trim())) && valid;
-    valid = validateTextField('address',   v => v.trim().length > 0)            && valid;
-    valid = validateSelect('wilaya')                                             && valid;
-    valid = validateRadio('formModel', 'formModelOptions')                      && valid;
-    valid = validateRadio('size', 'sizeOptions')                                && valid;
+    valid = validateText('fullName', v => v.trim().length > 0)                       && valid;
+    valid = validateText('phone',    v => /^[+]?[\d\s\-().]{7,}$/.test(v.trim()))   && valid;
+    valid = validateText('address',  v => v.trim().length > 0)                       && valid;
+    valid = validateSelect('wilaya')                                                  && valid;
+    valid = validateRadio('formModel', 'formModelOptions')                            && valid;
+    valid = validateRadio('size',      'sizeOptions')                                 && valid;
 
-    // Sync hidden fields one final time before the POST
-    updateOrderSummary();
+    updateOrderSummary(); // final sync before POST
 
     if (!valid) {
       e.preventDefault();
       document.querySelector('.form-group.invalid')
               ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
-      // Form is valid — let FormSubmit POST proceed naturally.
-      // Show success message for users with JS-enhanced flows.
       successMessage.classList.add('show');
     }
   });
 
-  // Validate a text / textarea field
-  function validateTextField(id, fn) {
+  function validateText(id, fn) {
     const el = document.getElementById(id);
     const ok = fn(el.value);
     el.closest('.form-group').classList.toggle('invalid', !ok);
     return ok;
   }
 
-  // Validate a <select> element
   function validateSelect(id) {
     const el = document.getElementById(id);
     const ok = el.value.trim().length > 0;
@@ -321,17 +396,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return ok;
   }
 
-  // Validate a radio group by container ID
   function validateRadio(name, containerId) {
     const checked = document.querySelector(`input[name="${name}"]:checked`);
-    const group   = document.getElementById(containerId).closest('.form-group');
-    group.classList.toggle('invalid', !checked);
+    document.getElementById(containerId)
+            .closest('.form-group')
+            .classList.toggle('invalid', !checked);
     return !!checked;
   }
 
-  // =====================================================
-  // 8. LIVE ERROR CLEARING (clears as user corrects)
-  // =====================================================
+  // Live error clearing while user types
   ['fullName', 'phone', 'address'].forEach(id => {
     document.getElementById(id).addEventListener('input', () => {
       document.getElementById(id).closest('.form-group').classList.remove('invalid');
@@ -339,8 +412,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =====================================================
-  // 9. INITIALISE ON PAGE LOAD
+  // 11. INITIALISE
   // =====================================================
+  switchModel('Model A'); // sets up thumbnails, arrows, hero image
   updateOrderSummary();
 
 });

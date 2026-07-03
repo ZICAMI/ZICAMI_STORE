@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Your T-Shirt</title>
+  <title>Order Your Sacoche</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -41,21 +41,17 @@
 
     <!-- Product info -->
     <div class="product-info">
-      <h1 class="product-title">T-Shirt</h1>
+      <h1 class="product-title">SACOCHE BMW </h1>
       <p class="product-description">
-        T-shirt premium 100 % coton, coupe décontractée. Doux, respirant .
+        SACOCHE BMW 
       </p>
-      <p class="product-price">3500 DA</p>
+      <p class="product-price">12000 DA</p>
 
       <!-- Model swatches (preview side) -->
       <div class="preview-model-options">
-        <span class="option-label">Model: <span id="selectedModelLabel">Model A</span></span>
+         <span id="selectedModelLabel"></span></span>
         <div class="model-swatches">
-          <button type="button" class="model-swatch active" data-model="Model A" aria-label="Model A">A</button>
-          <button type="button" class="model-swatch" data-model="Model B" aria-label="Model B">B</button>
-          <button type="button" class="model-swatch" data-model="Model C" aria-label="Model C">C</button>
-          <button type="button" class="model-swatch" data-model="Model D" aria-label="Model D">D</button>
-          <button type="button" class="model-swatch" data-model="Model E" aria-label="Model E">E</button>
+          
         </div>
       </div>
 
@@ -81,7 +77,7 @@
     <form action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value="09b44a62-9044-4d25-932c-92fc7e4e31c8">
       <!-- FormSubmit config -->
-      <input type="hidden" name="_subject"  value="New T-Shirt Order!">
+      <input type="hidden" name="_subject"  value="New SACOCHE Order!">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha"  value="false">
 
@@ -142,51 +138,36 @@
 
       <!-- Model Selection (form side — 5 cards) -->
       <div class="form-group">
-        <label>Model <span class="required">*</span></label>
+        <label> </span></label>
         <div class="form-model-options" id="formModelOptions">
 
           <input type="radio" id="formModelA" name="formModel" value="Model A" class="form-model-radio" checked>
-          <label for="formModelA" class="form-model-label">
-            <span class="model-thumb"><img src="images/model-a-front.png.jpeg" alt="Model A" class="model-thumb-img"></span>
-            <span class="model-thumb-name">Model A</span>
-          </label>
+          
 
           <input type="radio" id="formModelB" name="formModel" value="Model B" class="form-model-radio">
-          <label for="formModelB" class="form-model-label">
-            <span class="model-thumb"><img src="images/model-b-front.png.jpeg" alt="Model B" class="model-thumb-img"></span>
-            <span class="model-thumb-name">Model B</span>
+          
           </label>
 
           <input type="radio" id="formModelC" name="formModel" value="Model C" class="form-model-radio">
-          <label for="formModelC" class="form-model-label">
-            <span class="model-thumb"><img src="images/model-c-front.png.jpeg" alt="Model C" class="model-thumb-img"></span>
-            <span class="model-thumb-name">Model C</span>
+          
+            
           </label>
 
           <input type="radio" id="formModelD" name="formModel" value="Model D" class="form-model-radio">
-          <label for="formModelD" class="form-model-label">
-            <span class="model-thumb"><img src="images/model-d-front.png.jpeg" alt="Model D" class="model-thumb-img"></span>
-            <span class="model-thumb-name">Model D</span>
-          </label>
+          
 
           <input type="radio" id="formModelE" name="formModel" value="Model E" class="form-model-radio">
-          <label for="formModelE" class="form-model-label">
-            <span class="model-thumb"><img src="images/model-e-front.png.jpeg" alt="Model E" class="model-thumb-img"></span>
-            <span class="model-thumb-name">Model E</span>
-          </label>
+          
 
         </div>
-        <span class="error-message">Please select a model.</span>
+        
       </div>
 
       <!-- Size -->
       <div class="form-group">
-        <label>Taille <span class="required">*</span></label>
+        
         <div class="size-options" id="sizeOptions">
-          <input type="radio" id="sizeS"  name="size" value="S"  class="size-radio"><label for="sizeS"  class="size-label">S</label>
-          <input type="radio" id="sizeM"  name="size" value="M"  class="size-radio"><label for="sizeM"  class="size-label">M</label>
-          <input type="radio" id="sizeL"  name="size" value="L"  class="size-radio"><label for="sizeL"  class="size-label">L</label>
-          <input type="radio" id="sizeXL" name="size" value="XL" class="size-radio"><label for="sizeXL" class="size-label">XL</label>
+          
         </div>
         <span class="error-message">Please select a size.</span>
       </div>
@@ -227,7 +208,7 @@
         <h3 class="summary-title">votre commande</h3>
         <div class="summary-row">
           <span class="summary-label">Prix ​​du produit</span>
-          <span class="summary-value" id="summaryProductPrice">3500 DA</span>
+          <span class="summary-value" id="summaryProductPrice">12000 DA</span>
         </div>
         <div class="summary-row">
           <span class="summary-label">Quantité</span>
@@ -240,7 +221,7 @@
         <div class="summary-divider"></div>
         <div class="summary-row summary-total">
           <span class="summary-label">Total </span>
-          <span class="summary-value" id="summaryTotalPrice">3500 DA</span>
+          <span class="summary-value" id="summaryTotalPrice">12000 DA</span>
         </div>
       </div>
 
