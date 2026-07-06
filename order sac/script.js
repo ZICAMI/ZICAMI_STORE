@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //      images/<model-key>-back.png
   // =====================================================
 
-  const PRODUCT_PRICE = 1200; // DA — single source of truth
+  const PRODUCT_PRICE = 12000; // DA — single source of truth
 
   // 5 models, each with 3 ordered views
   const MODELS = {
