@@ -6,6 +6,10 @@
 // =====================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('backBtn').addEventListener('click', () => {
+  window.history.back();
+});
+
 
   // =====================================================
   // 0. CONFIGURATION
