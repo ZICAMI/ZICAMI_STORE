@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const MODELS = {
     'Model A': {
       views: [
-        { label: 'Front', src: 'images/model-a-front.png.jpeg' },
-        { label: 'Side',  src: 'images/model-a-side.png.jpeg'  },
+        { label: 'Front', src: 'images/model-a-side.png.jpeg' },
+        { label: 'Side',  src: 'images/model-a-front.png.jpeg'  },
         { label: 'Back',  src: 'images/model-a-back.png.jpeg'  }
       ]
     },
