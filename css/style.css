@@ -583,6 +583,19 @@ textarea:focus {
   .product-image-wrapper {
     max-width: 460px;
   }
+  .quality-section {
+      flex-direction: column;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .quality-points li {
+      text-align: left;
+    }
+    .quality-text p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }
 
 /* ===========================
