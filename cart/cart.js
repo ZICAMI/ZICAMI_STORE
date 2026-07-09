@@ -197,7 +197,7 @@
     drawer.innerHTML = `
       <!-- Header -->
       <div class="cart-header">
-        <h2>🛒 Your Cart <span id="cartHeaderCount"></span></h2>
+        <h2>🛒 Votre panier <span id="cartHeaderCount"></span></h2>
         <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart">✕</button>
       </div>
 
@@ -207,7 +207,7 @@
         <!-- Empty state -->
         <div class="cart-empty" id="cartEmptyState">
           <div class="cart-empty-icon">🛍️</div>
-          <p>Your cart is empty.</p>
+          <p>Votre panier est vide.</p>
         </div>
 
         <!-- Item list -->
@@ -239,26 +239,26 @@
 
             <!-- Full Name -->
             <div class="form-group">
-              <label for="co_fullName">Full Name <span style="color:#ef4444">*</span></label>
+              <label for="co_fullName">Nom et prénom <span style="color:#ef4444">*</span></label>
               <input type="text" id="co_fullName" name="Full Name"
-                     placeholder="e.g. John Doe" autocomplete="name">
-              <span class="error-msg">Please enter your full name.</span>
+                     placeholder="e.x. Zicami La3ziz" autocomplete="name">
+              <span class="error-msg">Veuillez saisir votre nom complet.</span>
             </div>
 
             <!-- Phone -->
             <div class="form-group">
-              <label for="co_phone">Phone Number <span style="color:#ef4444">*</span></label>
+              <label for="co_phone">numéro de téléphone <span style="color:#ef4444">*</span></label>
               <input type="tel" id="co_phone" name="Phone Number"
-                     placeholder="e.g. 0555 12 34 56" autocomplete="tel">
-              <span class="error-msg">Please enter a valid phone number.</span>
+                     placeholder="e.g. 0555 55 55 55" autocomplete="tel">
+              <span class="error-msg">Veuillez saisir un numéro de téléphone valide.</span>
             </div>
 
             <!-- Address -->
             <div class="form-group">
               <label for="co_address">Address <span style="color:#ef4444">*</span></label>
               <textarea id="co_address" name="Address" rows="2"
-                        placeholder="Street, City, Neighborhood..."></textarea>
-              <span class="error-msg">Please enter your address.</span>
+                        placeholder="Rue, ville, quartier..."></textarea>
+              <span class="error-msg">Veuillez saisir votre adresse.</span>
             </div>
 
             <!-- Wilaya -->
@@ -267,16 +267,16 @@
               <select id="co_wilayaSelect" name="WilayaSelect">
                 <option value="" disabled selected>Select your wilaya</option>
               </select>
-              <span class="error-msg">Please select your wilaya.</span>
+              <span class="error-msg">Veuillez sélectionner votre wilaya.</span>
             </div>
 
             <!-- Delivery Type -->
             <div class="form-group">
-              <label>Delivery Type <span style="color:#ef4444">*</span></label>
+              <label>Type de livraison <span style="color:#ef4444">*</span></label>
               <div class="checkout-delivery-options">
                 <input type="radio" id="co_home" name="co_deliveryType"
                        value="home" class="co-delivery-radio" checked>
-                <label for="co_home" class="co-delivery-label">🚚 Home Delivery</label>
+                <label for="co_home" class="co-delivery-label">🚚 Livraison à domicile</label>
 
                 <input type="radio" id="co_desk" name="co_deliveryType"
                        value="desk" class="co-delivery-radio">
@@ -286,13 +286,13 @@
 
             <!-- Order review (rendered by JS before submit) -->
             <div class="order-review-panel" id="orderReviewPanel">
-              <h3>📋 Order Review</h3>
+              <h3>📋 Révision de la commande</h3>
               <div id="orderReviewContent"></div>
             </div>
 
             <!-- Submit -->
             <button type="submit" class="checkout-submit-btn" id="checkoutSubmitBtn">
-              ✅ Place Order
+              ✅ passer la commande
             </button>
 
           </form><!-- /cartCheckoutForm -->
@@ -304,20 +304,20 @@
       <div class="cart-footer" id="cartFooter" style="display:none">
 
         <div class="cart-summary-row">
-          <span class="label">Subtotal</span>
+          <span class="label">total</span>
           <span class="value" id="cartSubtotalDisplay">0 DA</span>
         </div>
         <div class="cart-summary-row">
-          <span class="label">Delivery</span>
+          <span class="label">livraison</span>
           <span class="value" id="cartDeliveryDisplay">--</span>
         </div>
         <div class="cart-total-row">
-          <span>Grand Total</span>
+          <span> Grand Total</span>
           <span class="total-value" id="cartGrandTotalDisplay">0 DA</span>
         </div>
 
         <button class="cart-checkout-btn" id="proceedCheckoutBtn">
-          Proceed to Checkout →
+          passer la commande →
         </button>
 
       </div><!-- /cartFooter -->
