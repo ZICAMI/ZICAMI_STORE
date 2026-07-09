@@ -16,7 +16,7 @@ function resetFilterBtns(){
     $(this).removeClass('active-filter-btn');
   });
 }
-Scroll-reveal animation using Intersection Observer
+// Scroll-reveal animation using Intersection Observer
   (function () {
     const section = document.getElementById('quality-section');
     if (!section) return;
