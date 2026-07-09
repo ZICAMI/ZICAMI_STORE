@@ -690,12 +690,7 @@ select {
     font-size: 14px;
     margin-top: 50px;
 }
-body {
-  min-height: 200vh; /* just for testing scroll */
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(180deg, #e8edf3, #cfd9e3);
-}
+
 
 .back-btn {
   position: fixed;
