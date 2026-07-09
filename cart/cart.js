@@ -583,19 +583,19 @@
 
     content.innerHTML = `
       <div class="review-section-title">Customer Info</div>
-      <div class="review-row"><span class="rl">Name</span>    <span class="rv">${name}</span></div>
-      <div class="review-row"><span class="rl">Phone</span>   <span class="rv">${phone}</span></div>
+      <div class="review-row"><span class="rl">Nom </span>    <span class="rv">${name}</span></div>
+      <div class="review-row"><span class="rl">Telephone </span>   <span class="rv">${phone}</span></div>
       <div class="review-row"><span class="rl">Address</span> <span class="rv">${address}</span></div>
       <div class="review-row"><span class="rl">Wilaya</span>  <span class="rv">${wilaya}</span></div>
-      <div class="review-row"><span class="rl">Delivery</span><span class="rv">${dtype}</span></div>
+      <div class="review-row"><span class="rl">livraison</span><span class="rv">${dtype}</span></div>
 
       <div class="review-section-title" style="margin-top:14px">Products</div>
       ${productsHTML}
 
       <div class="review-divider"></div>
-      <div class="review-row"><span class="rl">Subtotal</span>      <span class="rv">${subtotal} DA</span></div>
-      <div class="review-row"><span class="rl">Delivery</span>      <span class="rv">${deliveryCost > 0 ? deliveryCost + ' DA' : '--'}</span></div>
-      <div class="review-total-row"><span>Grand Total</span>        <span>${grandTotal} DA</span></div>
+      <div class="review-row"><span class="rl">Total </span>      <span class="rv">${subtotal} DA</span></div>
+      <div class="review-row"><span class="rl">livraison</span>      <span class="rv">${deliveryCost > 0 ? deliveryCost + ' DA' : '--'}</span></div>
+      <div class="review-total-row"><span>GRAND TOTAL </span>        <span>${grandTotal} DA</span></div>
     `;
 
     panel.classList.add('open');
