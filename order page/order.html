@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRACLET </title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order BRACLET</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/cart/cart.css">
 </head>
 <body>
   <button class="back-btn" id="backBtn">
@@ -12,219 +13,121 @@
     <path d="M19 12H5"></path>
     <path d="M12 19l-7-7 7-7"></path>
   </svg>
-  RETOUR
+  Back
 </button>
 
-<div class="page-wrapper">
+<div class="page-wrapper page-wrapper--product">
 
-  <!-- ===== LEFT SIDE: PRODUCT PREVIEW ===== -->
+  <!-- ===== LEFT: PRODUCT PREVIEW (image + navigation) ===== -->
   <section class="product-preview">
+
+    <!-- Main image with arrow navigation -->
     <div class="product-image-wrapper">
-      <img id="productImage" src="images/black-shirt.png" alt="Classic T-Shirt" class="product-image">
+      <button type="button" class="arrow-btn arrow-prev" id="arrowPrev" aria-label="Previous view">&#8249;</button>
+      <img id="productImage" src="images/model-a-front.png" alt="T-Shirt Preview" class="product-image">
+      <button type="button" class="arrow-btn arrow-next" id="arrowNext" aria-label="Next view">&#8250;</button>
+      <span class="view-badge" id="viewBadge">Front</span>
     </div>
 
-    <div class="product-info">
-      <h1 class="product-title"> BRACLET BMW </h1>
-      <p class="product-description">
+    <!-- Thumbnail strip -->
+    <div class="thumbnail-strip" id="thumbnailStrip">
+      <button type="button" class="thumb-btn active" data-view="0" aria-label="Front view">
+        <img src="images/model-a-front.png" alt="Front" class="thumb-img" id="thumb0">
+        <span class="thumb-label">Front</span>
+      </button>
+      <button type="button" class="thumb-btn" data-view="1" aria-label="Side view">
+        <img src="images/model-a-side.jpeg" alt="Side" class="thumb-img" id="thumb1">
+        <span class="thumb-label">Side</span>
+      </button>
+      <button type="button" class="thumb-btn" data-view="2" aria-label="Back view">
+        <img src="images/model-a-back.png" alt="Back" class="thumb-img" id="thumb2">
+        <span class="thumb-label">Back</span>
+      </button>
+    </div>
+
+    <!-- Thumbnail strip -->
+    <div class="thumbnail-strip" id="thumbnailStrip">
       
-      </p>
-      <p class="product-price" id="productPriceDisplay">1000 DA</p>
+    </div>
 
-      <!-- Color Swatches -->
-      <div class="color-options">
-        <span class="option-label">Color: <span id="selectedColorLabel">Black</span></span>
-        <div class="swatches">
-          <button
-            type="button"
-            class="swatch swatch-black active"
-            data-color="black"
-            data-image="images/black-shirt.png"
-            aria-label="Select Black color"
-            title="Black">
-          </button>
-          <button
-            type="button"
-            class="swatch swatch-white"
-            data-color="white"
-            data-image="images/white-shirt.png"
-            aria-label="Select White color"
-            title="White">
-          </button>
-        </div>
+    <!-- Product info block -->
+    <div class="product-info">
+      <h1 class="product-title">BRACLET BMW</h1>
+      <p class="product-description">
+        BMW SAC A DOS
+      <p class="product-price">1000 DA</p>
+
+      <!-- Model swatches -->
+      <div class="preview-model-options">
+        <span class="option-label">Model: <span id="selectedModelLabel">Model A</span></span>
+        <div class="model-swatches">
+          <button type="button" class="model-swatch active" data-model="Model A" aria-label="Model A">A</button>
+          <button type="button" class="model-swatch active" data-model="Model B" aria-label="Model B">B</button>
+          
+      </div>
+
+      <!-- Color swatches -->
+      
+  </section>
+
+  <!-- ===== RIGHT: PRODUCT OPTIONS (size, qty, add to cart) ===== -->
+  <section class="product-options-section">
+    <h2 class="form-title">Personnalisez votre commande</h2>
+    <p class="form-subtitle"> ajoutez à votre panier.</p>
+
+    <!-- Model Selection -->
+    <div class="form-group">
+      <label>Model <span class="required">*</span></label>
+      <div class="form-model-options" id="formModelOptions">
+
+        <input type="radio" id="formModelA" name="formModel" value="Model A" class="form-model-radio" checked>
+        <label for="formModelA" class="form-model-label">
+          <span class="model-thumb"><img src="images/model-a-front.png" alt="Model A" class="model-thumb-img"></span>
+          <span class="model-thumb-name">NOIR</span>
+        </label>
+        <input type="radio" id="formModelB" name="formModel" value="Model B" class="form-model-radio">
+        <label for="formModelB" class="form-model-label">
+          <span class="model-thumb"><img src="images/model-b-front.png" alt="Model B" class="model-thumb-img"></span>
+          <span class="model-thumb-name">BLANC</span>
+        </label>
+
+        
+      </div>
+      <span class="error-message" id="modelError">Veuillez sélectionner un modèle.</span>
+    </div>
+
+    <!-- Size -->
+    
+    <!-- Color -->
+    
+
+    <!-- Quantity -->
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <div class="quantity-selector">
+        <button type="button" class="qty-btn" id="decreaseQty" aria-label="Decrease">&minus;</button>
+        <input type="number" id="quantity" value="1" min="1" max="99" readonly>
+        <button type="button" class="qty-btn" id="increaseQty" aria-label="Increase">&plus;</button>
       </div>
     </div>
+
+    <!-- ADD TO CART -->
+    <button type="button" id="addToCartBtn" class="add-to-cart-btn">
+      🛒 Add to Cart
+    </button>
+    
+
   </section>
+  
 
-  <!-- ===== RIGHT SIDE: ORDER FORM ===== -->
-  <section class="order-form-section">
-    <h2 class="form-title">Passez votre commande</h2>
-    <p class="form-subtitle">Veuillez compléter les informations ci-dessous pour finaliser votre commande.</p>
-
-    <!-- 
-      FormSubmit setup:
-      Replace "your@email.com" with your real email address.
-      The hidden inputs below carry computed values (color, size, wilaya, 
-      delivery type, delivery cost, total price) so they arrive in the email.
-    -->
-    <form action="https://api.web3forms.com/submit" method="POST">
-  <input type="hidden" name="access_key" value="09b44a62-9044-4d25-932c-92fc7e4e31c8">
-      <!-- FormSubmit configuration (hidden) -->
-      <input type="hidden" name="_subject" value="New braclet Order!">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-
-      <!-- Hidden fields synced via JS to carry computed/selected values -->
-      <input type="hidden" name="Color" id="hiddenColor" value="Black">
-      <input type="hidden" name="Size" id="hiddenSize" value="">
-      <input type="hidden" name="Wilaya" id="hiddenWilaya" value="">
-      <input type="hidden" name="Delivery Type" id="hiddenDeliveryType" value="Home Delivery">
-      <input type="hidden" name="Product Price" id="hiddenProductPrice" value="2500">
-      <input type="hidden" name="Delivery Cost" id="hiddenDeliveryCost" value="0">
-      <input type="hidden" name="Total Price" id="hiddenTotalPrice" value="2500">
-
-      <!-- Full Name -->
-      <div class="form-group">
-        <label for="fullName">Nom et Prénom <span class="required">*</span></label>
-        <input type="text" id="fullName" name="Full Name" placeholder="e.x. zicami_la3ziz" autocomplete="name">
-        <span class="error-message" id="fullNameError">Veuillez saisir votre nom complet.</span>
-      </div>
-
-      <!-- Phone Number -->
-      <div class="form-group">
-        <label for="phone">Numéro de Téléphone <span class="required">*</span></label>
-        <input type="tel" id="phone" name="Phone Number" placeholder="e.x. 0555 55 55 55" autocomplete="tel">
-        <span class="error-message" id="phoneError">Veuillez saisir un numéro de téléphone valide.</span>
-      </div>
-
-      <!-- Address -->
-      <div class="form-group">
-        <label for="address">Address <span class="required">*</span></label>
-        <textarea id="address" name="Address" rows="3" placeholder="Rue, ville, quartier..." autocomplete="street-address"></textarea>
-        <span class="error-message" id="addressError">Veuillez saisir votre adresse de livraison.</span>
-      </div>
-
-      <!-- Wilaya Selection -->
-      <div class="form-group">
-        <label for="wilaya">Wilaya <span class="required">*</span></label>
-        <select id="wilaya" name="WilayaSelect">
-          <option value="" disabled selected>Sélectionnez votre wilaya</option>
-          <!-- Options populated dynamically via JavaScript -->
-        </select>
-        <span class="error-message" id="wilayaError">Veuillez sélectionner votre wilaya.</span>
-      </div>
-
-      <!-- Delivery Type -->
-      <div class="form-group">
-        <label>Type de livraison <span class="required">*</span></label>
-        <div class="delivery-options" id="deliveryOptions">
-          <input type="radio" id="deliveryHome" name="deliveryType" value="home" class="delivery-radio" checked>
-          <label for="deliveryHome" class="delivery-label">
-            <i class="delivery-icon">🚚</i>
-            <span>Livraison à domicile</span>
-          </label>
-
-          <input type="radio" id="deliveryDesk" name="deliveryType" value="desk" class="delivery-radio">
-          <label for="deliveryDesk" class="delivery-label">
-            <i class="delivery-icon">🏢</i>
-            <span>Stop Desk </span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Size Selection -->
-      <div class="form-group">
-        
-        <div class="size-options" id="sizeOptions">
-          <input type="radio" id="sizeS" name="size" value="S" class="size-radio">
-          
-
-          <input type="radio" id="sizeM" name="size" value="M" class="size-radio">
-          
-
-          <input type="radio" id="sizeL" name="size" value="L" class="size-radio">
-          
-
-          <input type="radio" id="sizeXL" name="size" value="XL" class="size-radio">
-          
-        </div>
-        
-      </div>
-
-      <!-- Color Selection -->
-      <div class="form-group">
-        <label> Couleur <span class="required">*</span></label>
-        <div class="form-color-options" id="formColorOptions">
-          <input type="radio" id="colorBlack" name="formColor" value="black" class="form-color-radio" checked>
-          <label for="colorBlack" class="form-color-label">
-            <span class="color-dot color-dot-black"></span> Black
-          </label>
-
-          <input type="radio" id="colorWhite" name="formColor" value="white" class="form-color-radio">
-          <label for="colorWhite" class="form-color-label">
-            <span class="color-dot color-dot-white"></span> White
-          </label>
-        </div>
-      </div>
-
-      <!-- Quantity Selector -->
-      <div class="form-group">
-        <label for="quantity">Quantité</label>
-        <div class="quantity-selector">
-          <button type="button" class="qty-btn" id="decreaseQty" aria-label="Decrease quantity">&minus;</button>
-          <input type="number" id="quantity" name="Quantity" value="1" min="1" max="99" readonly>
-          <button type="button" class="qty-btn" id="increaseQty" aria-label="Increase quantity">&plus;</button>
-        </div>
-      </div>
-
-      <!-- Order Notes -->
-      <div class="form-group">
-        <label for="notes">Notes de commande<span class="optional"> (optional)</span></label>
-        <textarea id="notes" name="Order Notes" rows="3" placeholder="Des instructions particulières concernant votre commande..."></textarea>
-      </div>
-
-      <!-- ===== ORDER SUMMARY CARD ===== -->
-      <div class="order-summary" id="orderSummary">
-        <h3 class="summary-title">votre commande</h3>
-
-        <div class="summary-row">
-          <span class="summary-label">Prix ​​du produit</span>
-          <span class="summary-value" id="summaryProductPrice">1000 DA</span>
-        </div>
-
-        <div class="summary-row">
-          <span class="summary-label">Quantité</span>
-          <span class="summary-value" id="summaryQuantity">1</span>
-        </div>
-
-        <div class="summary-row">
-          <span class="summary-label">Frais de livraison</span>
-          <span class="summary-value" id="summaryDeliveryCost">--</span>
-        </div>
-
-        <div class="summary-divider"></div>
-
-        <div class="summary-row summary-total">
-          <span class="summary-label">Total </span>
-          <span class="summary-value" id="summaryTotalPrice">1000 DA</span>
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" class="submit-btn" id="submitBtn">Commandez maintenant</button>
-
-      <!-- Success Message -->
-      <div class="success-message" id="successMessage">
-        ✅ Votre commande a bien été enregistrée !
-      </div>
-
-    </form>
-  </section>
-
-</div>
-
-<script src="script.js"></script>
+  
+</div><!-- /.page-wrapper -->
 <footer class="footer">
     <p>&copy; Abdellah Chemseddine. All rights reserved.</p>
 </footer>
+
+
+<script src="script.js"></script>
+<script src="/cart/cart.js"></script>
 </body>
 </html>

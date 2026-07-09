@@ -29,65 +29,6 @@ body {
   line-height: 1.6;
   min-height: 100vh;
 }
-body {
-  min-height: 200vh; /* just for testing scroll */
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(180deg, #e8edf3, #cfd9e3);
-}
-
-.back-btn {
-  position: fixed;
-  top: 24px;
-  left: 24px;
-  z-index: 1000;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 50px;
-
-  background: rgba(180, 200, 220, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  color: #2f3b4c;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-
-  box-shadow:
-    0 4px 20px rgba(90, 110, 140, 0.25),
-    inset 0 1px 1px rgba(255, 255, 255, 0.5);
-
-  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-}
-
-.back-btn:hover {
-  background: rgba(200, 220, 240, 0.4);
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 24px rgba(90, 110, 140, 0.35),
-    inset 0 1px 1px rgba(255, 255, 255, 0.6);
-}
-
-.back-btn:active {
-  transform: scale(0.94);
-}
-
-.back-btn svg {
-  width: 18px;
-  height: 18px;
-  color: #4a5d75;
-  transition: transform 0.25s ease;
-}
-
-.back-btn:hover svg {
-  transform: translateX(-4px);
-}
-
 
 /* ===========================
    PAGE LAYOUT
@@ -749,6 +690,65 @@ select {
     font-size: 14px;
     margin-top: 50px;
 }
+body {
+  min-height: 200vh; /* just for testing scroll */
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg, #e8edf3, #cfd9e3);
+}
+
+.back-btn {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50px;
+
+  background: rgba(180, 200, 220, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: #2f3b4c;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 20px rgba(90, 110, 140, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.back-btn:hover {
+  background: rgba(200, 220, 240, 0.4);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 24px rgba(90, 110, 140, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.back-btn:active {
+  transform: scale(0.94);
+}
+
+.back-btn svg {
+  width: 18px;
+  height: 18px;
+  color: #4a5d75;
+  transition: transform 0.25s ease;
+}
+
+.back-btn:hover svg {
+  transform: translateX(-4px);
+}
+
 /* ===========================
    TABLET — 3-col model grid
    =========================== */
@@ -772,4 +772,41 @@ select {
   .delivery-label   { min-width: 100%; }
   .size-label       { width: 46px; height: 40px; }
   .thumb-btn        { width: 64px; }
+}
+
+/* ===========================
+   PRODUCT OPTIONS SECTION
+   (replaces the old order form)
+   =========================== */
+.product-options-section {
+  background-color: var(--card, #ffffff);
+  border-radius: var(--radius-lg, 20px);
+  box-shadow: var(--shadow, 0 4px 20px rgba(0,0,0,.06));
+  padding: 24px;
+}
+
+/* On mobile the two sections stack; on desktop side-by-side */
+.page-wrapper--product {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 900px) {
+  .page-wrapper--product {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 40px 24px;
+    gap: 32px;
+  }
+
+  .page-wrapper--product .product-preview {
+    flex: 1;
+    position: sticky;
+    top: 40px;
+  }
+
+  .product-options-section {
+    flex: 1;
+  }
 }

@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order SAC A DOS </title>
+  <title>Order Your T-Shirt</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/cart/cart.css">
 </head>
 <body>
-  <body>
   <button class="back-btn" id="backBtn">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M19 12H5"></path>
     <path d="M12 19l-7-7 7-7"></path>
   </svg>
-  RETOUR
+  Back
 </button>
 
-<div class="page-wrapper">
+<div class="page-wrapper page-wrapper--product">
 
-  <!-- ===== LEFT: PRODUCT PREVIEW ===== -->
+  <!-- ===== LEFT: PRODUCT PREVIEW (image + navigation) ===== -->
   <section class="product-preview">
 
     <!-- Main image with arrow navigation -->
@@ -26,8 +26,6 @@
       <button type="button" class="arrow-btn arrow-prev" id="arrowPrev" aria-label="Previous view">&#8249;</button>
       <img id="productImage" src="images/model-a-front.png.jpeg" alt="T-Shirt Preview" class="product-image">
       <button type="button" class="arrow-btn arrow-next" id="arrowNext" aria-label="Next view">&#8250;</button>
-
-      <!-- View badge (Front / Side / Back) -->
       <span class="view-badge" id="viewBadge">Front</span>
     </div>
 
@@ -47,197 +45,78 @@
       </button>
     </div>
 
-    <!-- Product info -->
+    <!-- Product info block -->
     <div class="product-info">
-      <h1 class="product-title">SAC A DOS BMW </h1>
+      <h1 class="product-title">BMW SAC A DOS</h1>
       <p class="product-description">
-        SAC A DOS BMW
-      </p>
+        BMW SAC A DOS
       <p class="product-price">17000 DA</p>
 
-      <!-- Model swatches (preview side) -->
+      <!-- Model swatches -->
       <div class="preview-model-options">
-         <span id="selectedModelLabel"></span></span>
+        <span class="option-label">Model: <span id="selectedModelLabel">Model A</span></span>
         <div class="model-swatches">
+          <button type="button" class="model-swatch active" data-model="Model A" aria-label="Model A">A</button>
           
-        </div>
       </div>
 
-      <!-- Color swatches (independent) -->
-      <div class="color-options">
-        <span class="option-label"> <span id="selectedColorLabel"></span></span>
-        <div class="swatches">
-          
-        </div>
+      <!-- Color swatches -->
+      
+  </section>
+
+  <!-- ===== RIGHT: PRODUCT OPTIONS (size, qty, add to cart) ===== -->
+  <section class="product-options-section">
+    <h2 class="form-title">Personnalisez votre commande</h2>
+    <p class="form-subtitle"> ajoutez à votre panier.</p>
+
+    <!-- Model Selection -->
+    <div class="form-group">
+      <label>Model <span class="required">*</span></label>
+      <div class="form-model-options" id="formModelOptions">
+
+        <input type="radio" id="formModelA" name="formModel" value="Model A" class="form-model-radio" checked>
+        <label for="formModelA" class="form-model-label">
+          <span class="model-thumb"><img src="images/model-a-front.png.jpeg" alt="Model A" class="model-thumb-img"></span>
+          <span class="model-thumb-name">Model A</span>
+        </label>
+
+        
+      </div>
+      <span class="error-message" id="modelError">Veuillez sélectionner un modèle.</span>
+    </div>
+
+    <!-- Size -->
+    
+    <!-- Color -->
+    
+
+    <!-- Quantity -->
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <div class="quantity-selector">
+        <button type="button" class="qty-btn" id="decreaseQty" aria-label="Decrease">&minus;</button>
+        <input type="number" id="quantity" value="1" min="1" max="99" readonly>
+        <button type="button" class="qty-btn" id="increaseQty" aria-label="Increase">&plus;</button>
       </div>
     </div>
+
+    <!-- ADD TO CART -->
+    <button type="button" id="addToCartBtn" class="add-to-cart-btn">
+      🛒 Add to Cart
+    </button>
+    
+
   </section>
+  
 
-  <!-- ===== RIGHT: ORDER FORM ===== -->
-  <section class="order-form-section">
-    <h2 class="form-title">Passez votre commande</h2>
-    <p class="form-subtitle">Veuillez compléter les informations ci-dessous pour finaliser votre commande.</p>
-
-    <!--
-      Replace "your@email.com" with your real FormSubmit email.
-      All hidden inputs are synced by JS so every value arrives in the email.
-    -->
-    <form action="https://api.web3forms.com/submit" method="POST">
-  <input type="hidden" name="access_key" value="09b44a62-9044-4d25-932c-92fc7e4e31c8">
-      <!-- FormSubmit config -->
-      <input type="hidden" name="_subject"  value="New SACOCHE Order!">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha"  value="false">
-
-      <!-- Hidden computed fields (synced by JS) -->
-      <input type="hidden" name="Model"         id="hiddenModel"        value="Model A">
-      <input type="hidden" name="Color"         id="hiddenColor"        value="Black">
-      <input type="hidden" name="Size"          id="hiddenSize"         value="">
-      <input type="hidden" name="Wilaya"        id="hiddenWilaya"       value="">
-      <input type="hidden" name="Delivery Type" id="hiddenDeliveryType" value="Home Delivery">
-      <input type="hidden" name="Product Price" id="hiddenProductPrice" value="2500">
-      <input type="hidden" name="Delivery Cost" id="hiddenDeliveryCost" value="0">
-      <input type="hidden" name="Total Price"   id="hiddenTotalPrice"   value="2500">
-
-      <!-- Full Name -->
-      <div class="form-group">
-        <label for="fullName">Nom et Prénom <span class="required">*</span></label>
-        <input type="text" id="fullName" name="Full Name" placeholder="e.x. Zicami_La3ziz" autocomplete="name">
-        <span class="error-message">Please enter your full name.</span>
-      </div>
-
-      <!-- Phone -->
-      <div class="form-group">
-        <label for="phone">Numéro de Téléphone <span class="required">*</span></label>
-        <input type="tel" id="phone" name="Phone Number" placeholder="e.x. 0555 55 55 55" autocomplete="tel">
-        <span class="error-message">Please enter a valid phone number.</span>
-      </div>
-
-      <!-- Address -->
-      <div class="form-group">
-        <label for="address">Address <span class="required">*</span></label>
-        <textarea id="address" name="Address" rows="3" placeholder="Rue, ville, quartier..." autocomplete="street-address"></textarea>
-        <span class="error-message">Please enter your delivery address.</span>
-      </div>
-
-      <!-- Wilaya -->
-      <div class="form-group">
-        <label for="wilaya">Wilaya <span class="required">*</span></label>
-        <select id="wilaya" name="WilayaSelect">
-          <option value="" disabled selected>Selectionnez votre wilaya</option>
-        </select>
-        <span class="error-message">Please select your wilaya.</span>
-      </div>
-
-      <!-- Delivery Type -->
-      <div class="form-group">
-        <label>Type de livraison <span class="required">*</span></label>
-        <div class="delivery-options">
-          <input type="radio" id="deliveryHome" name="deliveryType" value="home" class="delivery-radio" checked>
-          <label for="deliveryHome" class="delivery-label">
-            <i class="delivery-icon">🚚</i><span>Livraison à domicile</span>
-          </label>
-          <input type="radio" id="deliveryDesk" name="deliveryType" value="desk" class="delivery-radio">
-          <label for="deliveryDesk" class="delivery-label">
-            <i class="delivery-icon">🏢</i><span>Stop Desk </span>
-          </label>
-        </div>
-      </div>
-
-      <!-- Model Selection (form side — 5 cards) -->
-      <div class="form-group">
-        <label> </span></label>
-        <div class="form-model-options" id="formModelOptions">
-
-          <input type="radio" id="formModelA" name="formModel" value="Model A" class="form-model-radio" checked>
-          
-
-          <input type="radio" id="formModelB" name="formModel" value="Model B" class="form-model-radio">
-          
-          </label>
-
-          <input type="radio" id="formModelC" name="formModel" value="Model C" class="form-model-radio">
-          
-            
-          </label>
-
-          <input type="radio" id="formModelD" name="formModel" value="Model D" class="form-model-radio">
-          
-
-          <input type="radio" id="formModelE" name="formModel" value="Model E" class="form-model-radio">
-          
-
-        </div>
-        
-      </div>
-
-      <!-- Size -->
-      
-
-      <!-- Color (form side) -->
-      <div class="form-group">
-        
-        <div class="form-color-options">
-          
-          
-            
-          </label>
-          
-          
-            
-          </label>
-        </div>
-      </div>
-
-      <!-- Quantity -->
-      <div class="form-group">
-        <label for="quantity">Quantité</label>
-        <div class="quantity-selector">
-          <button type="button" class="qty-btn" id="decreaseQty" aria-label="Decrease">&minus;</button>
-          <input type="number" id="quantity" name="Quantity" value="1" min="1" max="99" readonly>
-          <button type="button" class="qty-btn" id="increaseQty" aria-label="Increase">&plus;</button>
-        </div>
-      </div>
-
-      <!-- Notes -->
-      <div class="form-group">
-        <label for="notes">Notes de commande <span class="optional">(optional)</span></label>
-        <textarea id="notes" name="Order Notes" rows="3" placeholder="Des instructions particulières..."></textarea>
-      </div>
-
-      <!-- Order Summary -->
-      <div class="order-summary">
-        <h3 class="summary-title">votre commande</h3>
-        <div class="summary-row">
-          <span class="summary-label">Prix ​​du produit</span>
-          <span class="summary-value" id="summaryProductPrice">17000 DA</span>
-        </div>
-        <div class="summary-row">
-          <span class="summary-label">Quantité</span>
-          <span class="summary-value" id="summaryQuantity">1</span>
-        </div>
-        <div class="summary-row">
-          <span class="summary-label">Frais de livraison</span>
-          <span class="summary-value" id="summaryDeliveryCost">--</span>
-        </div>
-        <div class="summary-divider"></div>
-        <div class="summary-row summary-total">
-          <span class="summary-label">Total </span>
-          <span class="summary-value" id="summaryTotalPrice">22000 DA</span>
-        </div>
-      </div>
-
-      <button type="submit" class="submit-btn">Commandez maintenant</button>
-      <div class="success-message" id="successMessage">✅ Your order has been placed successfully!</div>
-
-    </form>
-  </section>
-
-</div>
-
-<script src="script.js"></script>
+  
+</div><!-- /.page-wrapper -->
 <footer class="footer">
     <p>&copy; Abdellah Chemseddine. All rights reserved.</p>
 </footer>
+
+
+<script src="script.js"></script>
+<script src="/cart/cart.js"></script>
 </body>
 </html>
