@@ -16,6 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // 0. CONFIGURATION
   // =====================================================
   const PRODUCT_PRICE = 3500; // DA
+  const MODEL_SIZES = {
+  'Model A': ['L', 'XL'],
+  'Model B': ['S', 'M', 'L', 'XXL'],
+  'Model C': ['S', 'XL', 'XXL'],
+  'Model D': ['S', 'M', 'L', 'XL', 'XXL'],
+  'Model E': ['S', 'M']
+};
 
   // 5 models × 3 views
   const MODELS = {
@@ -138,6 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
     previewModelSwatches.forEach(btn => {
       btn.classList.toggle('active', btn.dataset.model === modelName);
     });
+    updateAvailableSizes(modelName); 
+  syncCartProduct();
 
     // Sync form radio cards
     formModelRadios.forEach(r => { r.checked = (r.value === modelName); });
@@ -216,6 +225,34 @@ document.addEventListener('DOMContentLoaded', () => {
       unitPrice:   PRODUCT_PRICE
     };
   }
+  // =====================================================
+// AVAILABLE SIZES
+// Shows only the sizes available for the selected model.
+// Hides unavailable sizes and resets any checked size
+// that is no longer valid for the new model.
+// =====================================================
+function updateAvailableSizes(modelName) {
+  const available = MODEL_SIZES[modelName] || [];
+
+  document.querySelectorAll('.size-radio').forEach(radio => {
+    const label = document.querySelector(`label[for="${radio.id}"]`);
+    const isAvailable = available.includes(radio.value);
+
+    // Show or hide the radio + its label
+    radio.style.display = isAvailable ? '' : 'none';
+    if (label) label.style.display = isAvailable ? '' : 'none';
+
+    // Uncheck if this size is no longer available
+    if (!isAvailable && radio.checked) {
+      radio.checked = false;
+    }
+  });
+
+  // Clear any lingering size error
+  document.getElementById('sizeOptions')
+          ?.closest('.form-group')
+          ?.classList.remove('invalid');
+}
 
   // =====================================================
   // 9. INIT
