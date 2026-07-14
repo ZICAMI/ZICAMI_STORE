@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   'Model A': ['L', 'XL'],
   'Model B': ['S', 'M', 'L', 'XXL'],
   'Model C': ['S', 'XL', 'XXL'],
-  'Model D': ['S', 'M', 'L', 'XL', 'XXL'],
+  'Model D': ['S', 'XL', 'XXL'],
   'Model E': ['S', 'M']
 };
 
