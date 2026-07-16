@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Available sizes per model
 // Add or remove sizes here as your stock changes
 const MODEL_SIZES = {
-  'Model A': ['S', 'M','XXL'],
-  'Model B': [ 'L', 'XL', 'XXL'],
+  'Model A': ['S', 'M','L','XL','XXL'],
+  'Model B': ['S', 'M','L','XL','XXL'],
   
 };
 
