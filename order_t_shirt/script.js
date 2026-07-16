@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const PRODUCT_PRICE = 3500; // DA
   const MODEL_SIZES = {
   'Model A': ['L', 'XL'],
-  'Model B': ['S', 'M', 'L', 'XXL'],
-  'Model C': ['S', 'XL', 'XXL'],
+  'Model B': ['S','M', 'XXL'],
+  'Model C': ['S','XXL'],
   'Model D': ['S', 'XL', 'XXL'],
   'Model E': ['S', 'M']
 };
