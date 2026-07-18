@@ -257,7 +257,7 @@ function updateAvailableSizes(modelName) {
   // =====================================================
   // 9. INIT
   // =====================================================
-  switchModel('Model B');
+  switchModel('Model A');
   syncCartProduct();
 
 });
