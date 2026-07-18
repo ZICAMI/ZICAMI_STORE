@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =====================================================
   const PRODUCT_PRICE = 3500; // DA
   const MODEL_SIZES = {
-  'Model A': ['L', 'XL'],
+  'Model A': ['S','M','L','XL','XXL'],
   'Model B': ['S','M', 'XXL'],
   'Model C': ['S','XXL'],
   'Model D': ['S', 'XL', 'XXL'],
